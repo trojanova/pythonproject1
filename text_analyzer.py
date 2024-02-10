@@ -55,11 +55,11 @@ print("-"*40)
 
 #check if provided credentials are valid
 if username in users_dict:
-  if users_dict[username] == password :
+  if users_dict[username] == password:
     print ("Welcome to the app, " + username + ".\nWe have 3 texts to be analyzed.")
-  else :
+  else:
     print ("Invalid password.")
-else :
+else:
     print ("Unregistered user, terminating the program..")
 
 print("-"*40)
@@ -136,7 +136,7 @@ elif input_number.isdigit() and int(input_number) in text_numbers:
 
     word_len_dict_sorted = dict(sorted(word_len_dict.items()))
 
-    #max_length = max(word_len_dict_sorted.keys())
+    max_length = max(word_len_dict_sorted.keys())
 
     plot_width = max_length + 1
 
