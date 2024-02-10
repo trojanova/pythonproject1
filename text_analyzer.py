@@ -77,38 +77,33 @@ elif username in users_dict and users_dict[username] == password:
     elif input_number.isdigit() and int(input_number) in text_numbers:
         selected_text = texts[int(input_number)-1]
 
-        #output of the text analyzer for
+        #output of the text analyzer
         words = selected_text.split()
         words_stripped = [item.strip(".") for item in words]
 
         words_total = len(words_stripped)
 
         words_titlecase = 0
-        for word in words_stripped:
-          if word.istitle():
-            words_titlecase += 1
-
         words_uppercase = 0
-        for word in words_stripped:
-          if word.isupper():
-            words_uppercase += 1
-
         words_lowercase = 0
-        for word in words_stripped:
-          if word.islower():
-            words_lowercase += 1
-
         numeric_strings = 0
         sum_of_numeric_strings = 0
+
         for word in words_stripped:
-          if word.isdigit():
-            numeric_strings += 1
-            sum_of_numeric_strings += int(word)
+            if word.istitle():
+                words_titlecase += 1
+            elif word.isupper():
+                words_uppercase += 1
+            elif word.islower():
+                words_lowercase += 1
+            elif word.isdigit():
+                numeric_strings += 1
+                sum_of_numeric_strings += int(word)
 
         print("There are " + str(words_total) + " words in the selected text.")
         print("There are " + str(words_titlecase) + " titlecase words.")
         print("There are " + str(words_uppercase) + " uppercase words.")
-        print("There are " + str(words_lowercase) + " 38 lowercase words.")
+        print("There are " + str(words_lowercase) + " lowercase words.")
         print("There are " + str(numeric_strings) + " numeric strings.")
         print("The sum of all the numbers " + str(sum_of_numeric_strings) + ".")
 
