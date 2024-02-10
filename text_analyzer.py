@@ -54,118 +54,118 @@ password = input('password: ')
 print("-"*40)
 
 #check if provided credentials are valid
-if username in users_dict:
-  if users_dict[username] == password:
-    print ("Welcome to the app, " + username + ".\nWe have 3 texts to be analyzed.")
-  else:
-    print ("Invalid password.")
-else:
-    print ("Unregistered user, terminating the program..")
+if username not in users_dict:
+    print("Unregistered user, terminating the program..")
+elif username in users_dict and users_dict[username] != password:
+    print("Invalid password.")
+elif username in users_dict and users_dict[username] == password:
+    print("Welcome to the app, " + username + ".\nWe have 3 texts to be analyzed.")
 
-print("-"*40)
-
-#user input no2 -> select text
-input_number = input("Enter a number btw. 1 and 3 to select: ")
-
-print("-"*40)
-
-#if the input is valid, continue, if not, show the error message
-if input_number.isdigit() and int(input_number) not in text_numbers:
-    print("Number is out of range. Please enter a number between 1 and 3.")
-elif input_number.isdigit() == False:
-    print("Input is not a number. Please enter a number between 1 and 3.")
-elif input_number.isdigit() and int(input_number) in text_numbers:
-    selected_text = texts[int(input_number)-1]
-
-    #output of the text analyzer for
-    words = selected_text.split()
-    words_stripped = [item.strip(".") for item in words]
-
-    words_total = len(words_stripped)
-
-    words_titlecase = 0
-    for word in words_stripped:
-      if word.istitle():
-        words_titlecase += 1
-
-    words_uppercase = 0
-    for word in words_stripped:
-      if word.isupper():
-        words_uppercase += 1
-
-    words_lowercase = 0
-    for word in words_stripped:
-      if word.islower():
-        words_lowercase += 1
-
-    numeric_strings = 0
-    sum_of_numeric_strings = 0
-    for word in words_stripped:
-      if word.isdigit():
-        numeric_strings += 1
-        sum_of_numeric_strings += int(word)
-
-    print("There are " + str(words_total) + " words in the selected text.")
-    print("There are " + str(words_titlecase) + " titlecase words.")
-    print("There are " + str(words_uppercase) + " uppercase words.")
-    print("There are " + str(words_lowercase) + " 38 lowercase words.")
-    print("There are " + str(numeric_strings) + " numeric strings.")
-    print("The sum of all the numbers " + str(sum_of_numeric_strings) + ".")
 
     print("-"*40)
 
-    #data prep for word length occurance charts
-
-    word_len_dict = {}
-
-    words_total = len(words_stripped)
-
-    for word in words_stripped:
-        word_length = len(word)
-        if word_length not in word_len_dict.keys():
-            word_len_dict[word_length] = 1
-        elif word_length in word_len_dict.keys():
-            word_len_dict[word_length] += 1
-
-    #################### chart version 1 ####################
-
-    print("LEN|  OCCURENCES  |NR.")
-
-    col1_width = len("LEN")
-    col2_width = len("  OCCURENCES  ")
-
-    word_len_dict_sorted = dict(sorted(word_len_dict.items()))
-
-    max_length = max(word_len_dict_sorted.keys())
-
-    plot_width = max_length + 1
-
-    for i in word_len_dict_sorted:
-    #  if len(str(i)) == 1:
-        print(" "*(col1_width-len(str(i))) + str(i) + "|" + word_len_dict_sorted[i]*"*" + (col2_width-word_len_dict_sorted[i])*" " + "|" + str(word_len_dict_sorted[i]))
-    #  else:
-    #    print(" "*1 + str(i) + "|" + word_len_dict_sorted[i]*"*" + (plot_width-word_len_dict_sorted[i])*" " + "|" + str(word_len_dict_sorted[i]))
-
-    #################### chart version 2 ####################
+    #user input no2 -> select text
+    input_number = input("Enter a number btw. 1 and 3 to select: ")
 
     print("-"*40)
-    print()
 
-    import numpy as np
-    import matplotlib.pyplot as plt
+    #if the input is valid, continue, if not, show the error message
+    if input_number.isdigit() and int(input_number) not in text_numbers:
+        print("Number is out of range. Please enter a number between 1 and 3.")
+    elif input_number.isdigit() == False:
+        print("Input is not a number. Please enter a number between 1 and 3.")
+    elif input_number.isdigit() and int(input_number) in text_numbers:
+        selected_text = texts[int(input_number)-1]
 
-    fig, ax = plt.subplots()
+        #output of the text analyzer for
+        words = selected_text.split()
+        words_stripped = [item.strip(".") for item in words]
 
-    y_values = list(word_len_dict_sorted.keys())
-    x_values = list(word_len_dict_sorted.values())
+        words_total = len(words_stripped)
 
-    plt.barh(y_values, x_values, color ='teal')
+        words_titlecase = 0
+        for word in words_stripped:
+          if word.istitle():
+            words_titlecase += 1
 
-    plt.xticks(np.arange(1,max(word_len_dict_sorted.values())+1, step=1))
-    plt.yticks(np.arange(1,max(word_len_dict_sorted.keys())+1, step=1))
+        words_uppercase = 0
+        for word in words_stripped:
+          if word.isupper():
+            words_uppercase += 1
 
-    ax.invert_yaxis()
+        words_lowercase = 0
+        for word in words_stripped:
+          if word.islower():
+            words_lowercase += 1
 
-    plt.xlabel("Number of word length occurences")
-    plt.ylabel("Word length")
-    plt.show()
+        numeric_strings = 0
+        sum_of_numeric_strings = 0
+        for word in words_stripped:
+          if word.isdigit():
+            numeric_strings += 1
+            sum_of_numeric_strings += int(word)
+
+        print("There are " + str(words_total) + " words in the selected text.")
+        print("There are " + str(words_titlecase) + " titlecase words.")
+        print("There are " + str(words_uppercase) + " uppercase words.")
+        print("There are " + str(words_lowercase) + " 38 lowercase words.")
+        print("There are " + str(numeric_strings) + " numeric strings.")
+        print("The sum of all the numbers " + str(sum_of_numeric_strings) + ".")
+
+        print("-"*40)
+
+        #data prep for word length occurance charts
+
+        word_len_dict = {}
+
+        words_total = len(words_stripped)
+
+        for word in words_stripped:
+            word_length = len(word)
+            if word_length not in word_len_dict.keys():
+                word_len_dict[word_length] = 1
+            elif word_length in word_len_dict.keys():
+                word_len_dict[word_length] += 1
+
+        #################### chart version 1 ####################
+
+        print("LEN|  OCCURENCES  |NR.")
+
+        col1_width = len("LEN")
+        col2_width = len("  OCCURENCES  ")
+
+        word_len_dict_sorted = dict(sorted(word_len_dict.items()))
+
+        max_length = max(word_len_dict_sorted.keys())
+
+        plot_width = max_length + 1
+
+        for i in word_len_dict_sorted:
+        #  if len(str(i)) == 1:
+            print(" "*(col1_width-len(str(i))) + str(i) + "|" + word_len_dict_sorted[i]*"*" + (col2_width-word_len_dict_sorted[i])*" " + "|" + str(word_len_dict_sorted[i]))
+        #  else:
+        #    print(" "*1 + str(i) + "|" + word_len_dict_sorted[i]*"*" + (plot_width-word_len_dict_sorted[i])*" " + "|" + str(word_len_dict_sorted[i]))
+
+        #################### chart version 2 ####################
+
+        print("-"*40)
+        print()
+
+        import numpy as np
+        import matplotlib.pyplot as plt
+
+        fig, ax = plt.subplots()
+
+        y_values = list(word_len_dict_sorted.keys())
+        x_values = list(word_len_dict_sorted.values())
+
+        plt.barh(y_values, x_values, color ='teal')
+
+        plt.xticks(np.arange(1,max(word_len_dict_sorted.values())+1, step=1))
+        plt.yticks(np.arange(1,max(word_len_dict_sorted.keys())+1, step=1))
+
+        ax.invert_yaxis()
+
+        plt.xlabel("Number of word length occurences")
+        plt.ylabel("Word length")
+        plt.show()
