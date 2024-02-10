@@ -119,7 +119,7 @@ elif username in users_dict and users_dict[username] == password:
             word_length = len(word)
             if word_length not in word_len_dict.keys():
                 word_len_dict[word_length] = 1
-            elif word_length in word_len_dict.keys():
+            else:
                 word_len_dict[word_length] += 1
 
         #################### chart version 1 ####################
@@ -136,10 +136,7 @@ elif username in users_dict and users_dict[username] == password:
         plot_width = max_length + 1
 
         for i in word_len_dict_sorted:
-        #  if len(str(i)) == 1:
             print(" "*(col1_width-len(str(i))) + str(i) + "|" + word_len_dict_sorted[i]*"*" + (col2_width-word_len_dict_sorted[i])*" " + "|" + str(word_len_dict_sorted[i]))
-        #  else:
-        #    print(" "*1 + str(i) + "|" + word_len_dict_sorted[i]*"*" + (plot_width-word_len_dict_sorted[i])*" " + "|" + str(word_len_dict_sorted[i]))
 
         #################### chart version 2 ####################
 
